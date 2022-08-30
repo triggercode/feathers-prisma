@@ -1,4 +1,6 @@
-export type PrismaClient = any;
+import { Models } from '@triggercode/feathers-prisma';
+
+// export type PrismaClient = any;
 
 export type IdField = string | number | { [key: string]: any };
 
@@ -8,7 +10,7 @@ export type Paginate = {
 }
 
 export interface PrismaServiceOptions {
-  model: string;
+  model: keyof Models;
   events?: string[];
   multi?: boolean | string[];
   id?: string;

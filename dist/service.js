@@ -34,13 +34,19 @@ class PrismaService extends adapter_commons_1.AdapterService {
         if (!model) {
             throw new errors.GeneralError('You must provide a model string.');
         }
-        // @ts-ignore
         if (!client[model]) {
             throw new errors.GeneralError(`No model with name ${model} found in prisma client.`);
         }
         this.client = client;
-        // @ts-ignore
         this.Model = client[model];
+    }
+    find(params = {}) {
+        const _super = Object.create(null, {
+            find: { get: () => super.find }
+        });
+        return __awaiter(this, void 0, void 0, function* () {
+            return _super.find.call(this, params);
+        });
     }
     _find(params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
