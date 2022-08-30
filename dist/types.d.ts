@@ -8,7 +8,7 @@ export declare type Paginate = {
     max?: number;
 };
 export interface PrismaServiceOptions {
-    model: keyof Models;
+    model: string;
     events?: string[];
     multi?: boolean | string[];
     id?: string;

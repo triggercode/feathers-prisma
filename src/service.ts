@@ -37,7 +37,7 @@ export class PrismaService<K extends keyof Models, ModelData = Record<string, an
       throw new errors.GeneralError(`No model with name ${model} found in prisma client.`);
     }
     this.client = client;
-    this.Model = client[model];
+    this.Model = (client as any)[model];
   }
 
   async find(params: Params & { prisma?: Parameters<KeyOfModel<PrismaClient[K], 'findMany'>>[0] } = {}) {

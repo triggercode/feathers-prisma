@@ -12,7 +12,7 @@ export type Paginate = {
 }
 
 export interface PrismaServiceOptions {
-  model: keyof Models;
+  model: string;
   events?: string[];
   multi?: boolean | string[];
   id?: string;
