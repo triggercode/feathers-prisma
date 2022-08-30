@@ -49,6 +49,7 @@ class PrismaService extends adapter_commons_1.AdapterService {
         });
     }
     _find(params = {}) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const { query, filters } = this.filterQuery(params);
             const { whitelist } = this.options;
@@ -57,8 +58,8 @@ class PrismaService extends adapter_commons_1.AdapterService {
             }, this.options.id);
             try {
                 const findMany = () => {
-                    return this.Model.findMany(Object.assign(Object.assign(Object.assign({}, (typeof take === 'number' ? { skip, take } : { skip })), { orderBy,
-                        where }), (0, utils_1.buildSelectOrInclude)({ select, include })));
+                    return this.Model.findMany(Object.assign(Object.assign(Object.assign(Object.assign({}, (typeof take === 'number' ? { skip, take } : { skip })), { orderBy,
+                        where }), (0, utils_1.buildSelectOrInclude)({ select, include })), params.prisma));
                 };
                 if (!this.options.paginate.default || (typeof take !== 'number' && !take)) {
                     const data = yield findMany();
@@ -66,9 +67,9 @@ class PrismaService extends adapter_commons_1.AdapterService {
                 }
                 const [data, count] = yield this.client.$transaction([
                     findMany(),
-                    this.Model.count({
+                    this.Model.count(Object.assign({
                         where,
-                    }),
+                    }, { where: (_a = params === null || params === void 0 ? void 0 : params.prisma) === null || _a === void 0 ? void 0 : _a.where })),
                 ]);
                 const result = {
                     total: count,

@@ -52,12 +52,12 @@ export class PrismaService<K extends keyof Models, ModelData = Record<string, an
     }, this.options.id);
     try {
       const findMany = () => {
-        return this.Model.findMany({
+        return this.Model.findMany(Object.assign({
           ...(typeof take === 'number' ? { skip, take } : { skip }),
           orderBy,
           where,
           ...buildSelectOrInclude({ select, include }),
-        });
+        }, params.prisma));
       };
 
       if (!this.options.paginate.default || (typeof take !== 'number' && !take)) {
@@ -67,9 +67,9 @@ export class PrismaService<K extends keyof Models, ModelData = Record<string, an
 
       const [data, count] = await this.client.$transaction([
         findMany(),
-        this.Model.count({
+        this.Model.count(Object.assign({
           where,
-        }),
+        }, { where: (params?.prisma as any)?.where })),
       ]);
 
       const result = {
