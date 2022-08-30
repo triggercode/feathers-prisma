@@ -6,7 +6,7 @@ import { IdField, PrismaServiceOptions } from './types';
 import { buildPrismaQueryParams, buildSelectOrInclude, checkIdInQuery } from './utils';
 import { OPERATORS } from './constants';
 import { errorHandler } from './error-handler';
-import { Models } from '@triggercode/feathers-prisma';
+import { Models } from './types';
 
 type KeyOfModel<T, K extends keyof T> = T[K];
 
@@ -33,7 +33,7 @@ export class PrismaService<K extends keyof Models, ModelData = Record<string, an
       throw new errors.GeneralError('You must provide a model string.');
     }
 
-    if (!client[model]) {
+    if (!(model in client)) {
       throw new errors.GeneralError(`No model with name ${model} found in prisma client.`);
     }
     this.client = client;

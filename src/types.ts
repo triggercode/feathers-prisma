@@ -1,6 +1,8 @@
-import { Models } from '@triggercode/feathers-prisma';
 
-// export type PrismaClient = any;
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Models {
+
+}
 
 export type IdField = string | number | { [key: string]: any };
 
