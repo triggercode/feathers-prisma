@@ -34,7 +34,7 @@ class PrismaService extends adapter_commons_1.AdapterService {
         if (!model) {
             throw new errors.GeneralError('You must provide a model string.');
         }
-        if (!client[model]) {
+        if (!(model in client)) {
             throw new errors.GeneralError(`No model with name ${model} found in prisma client.`);
         }
         this.client = client;

@@ -1,4 +1,5 @@
-import { Models } from '@triggercode/feathers-prisma';
+export interface Models {
+}
 export declare type IdField = string | number | {
     [key: string]: any;
 };
